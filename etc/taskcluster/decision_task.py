@@ -14,9 +14,9 @@ def main(task_for, mock=False):
             CONFIG.treeherder_repo_name = "servo/servo-" + CONFIG.git_ref.split("/")[-1]
 
             linux_tidy_unit_docs()
-            android_arm32()
-            windows_unit()
-            macos_unit()
+            # android_arm32()
+            # windows_unit()
+            # macos_unit()
 
             # These are disabled in a "real" decision task,
             # but should still run when testing this Python code. (See `mock.py`.)
@@ -73,16 +73,16 @@ def linux_tidy_unit_docs():
         linux_build_task("Tidy + dev build + unit tests + docs")
         .with_treeherder("Linux x64", "Tidy+Unit+Doc")
         .with_script("""
-            ./mach test-tidy --no-progress --all
-            ./mach build --dev
-            ./mach test-unit
-            ./mach package --dev
-            ./mach test-tidy --no-progress --self-test
+            # ./mach test-tidy --no-progress --all
+            # ./mach build --dev
+            # ./mach test-unit
+            # ./mach package --dev
+            # ./mach test-tidy --no-progress --self-test
 
-            ./etc/memory_reports_over_time.py --test
-            ./etc/taskcluster/mock.py
-            ./etc/ci/lockfile_changed.sh
-            ./etc/ci/check_no_panic.sh
+            # ./etc/memory_reports_over_time.py --test
+            # ./etc/taskcluster/mock.py
+            # ./etc/ci/lockfile_changed.sh
+            # ./etc/ci/check_no_panic.sh
 
             ./mach doc
             cd target/doc
